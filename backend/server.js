@@ -17,7 +17,7 @@ app.get('/', (req, res)=>{
     console.log('Server is running in the backend')
 })
 
-app.use('/api', require('./routes/authRoutes'))
+app.use('/api/auth', require('./routes/authRoutes'))
 
 app.use((error, req, res, next)=>{ //global error handling middleware
     res.status(500).json({message:error.message})
