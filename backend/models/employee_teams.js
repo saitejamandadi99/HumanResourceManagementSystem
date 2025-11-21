@@ -31,8 +31,4 @@ const EmployeeTeams = sequelize.define('EmployeeTeams', {
     }
 });
 
-EmployeeTeams.sync()
-    .then(() => console.log('EmployeeTeams table created'))
-    .catch(err => console.log('EmployeeTeams table failed to create', err));
-
 module.exports = EmployeeTeams;

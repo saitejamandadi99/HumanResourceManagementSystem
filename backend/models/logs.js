@@ -27,8 +27,4 @@ const Logs = sequelize.define('Logs', {
     }
 });
 
-Logs.sync()
-    .then(() => console.log('Logs table created'))
-    .catch(err => console.log('Logs table failed to create', err));
-
 module.exports = Logs;

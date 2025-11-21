@@ -16,8 +16,5 @@ const Organisations = sequelize.define('Organisations', {
     }
 });
 
-Organisations.sync()
-.then(()=>console.log('Organisations table created'))
-.catch(err=>console.log('Organisations table failed to create', err))
 
 module.exports = Organisations

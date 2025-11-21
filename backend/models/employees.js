@@ -34,8 +34,5 @@ const Employees = sequelize.define('Employees', {
     }
 });
 
-Employees.sync()
-.then(()=>console.log('Employees table created'))
-.catch(err=>console.log('Employees table failed to create', err))
 
 module.exports = Employees

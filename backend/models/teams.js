@@ -27,8 +27,5 @@ const Teams  = sequelize.define('Teams', {
     }
 });
 
-Teams .sync()
-.then(()=>console.log('Teams  table created'))
-.catch(err=>console.log('Teams  table failed to create', err))
 
 module.exports = Teams 
