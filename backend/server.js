@@ -1,19 +1,32 @@
 const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
-const sequelize = require('./db')
 const app = express()
 app.use(express.json())
 app.use(cors())
 
-require('./models/organisations')
+require('./models/organisations');
+require('./models/users');
+require('./models/teams');
+require('./models/employees');
+require('./models/employee_teams');
+require('./models/logs');
 
 app.get('/', (req, res)=>{
     res.send('Server is running in the backend')
     console.log('Server is running in the backend')
 })
 
-const PORT = process.env.PORT || 5000 
-app.listen(PORT,()=>{
-    console.log(`server is running in http://localhost:${PORT}`)
-})
+const sequelize = require('./db');
+sequelize.sync()
+  .then(() => {
+    console.log('All tables synced!');
+    // Now safe to start the server
+    const PORT = process.env.PORT || 5000; 
+    app.listen(PORT, () => {
+      console.log(`Server is running at http://localhost:${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.log('Table sync failed:', err);
+  });

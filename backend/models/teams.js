@@ -1,6 +1,6 @@
 const {DataTypes} = require('sequelize')
 const sequelize = require('../db')
-const Teams  = sequelize.define('Teams ', {
+const Teams  = sequelize.define('Teams', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
