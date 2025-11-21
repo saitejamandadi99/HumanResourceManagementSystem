@@ -6,6 +6,8 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+require('./models/organisations')
+
 app.get('/', (req, res)=>{
     res.send('Server is running in the backend')
     console.log('Server is running in the backend')
