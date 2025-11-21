@@ -1,4 +1,5 @@
 const Employees = require('../models/employees');
+const Logs = require('../models/logs')
 
 // Create new employee
 const createEmployee = async (req, res) => {
@@ -14,6 +15,12 @@ const createEmployee = async (req, res) => {
       phone,
       organisation_id: req.organisation_id, //gets from the middleware function (jwt token paylaod data)
     });
+    await Logs.create({
+        organisation_id:req.organisation_id,
+        user_id : newEmployee.id, 
+        action : `Employee  '${newEmployee.id}' is created in organisation id '${req.organisation_id}'`,
+        timestamp: new Date()
+    })
     return res.status(201).json(newEmployee);
   } catch (error) {
     console.error('Create Employee error:', error);
@@ -44,6 +51,12 @@ const getEmployeeById = async (req, res) => {
     if (!employee) {
       return res.status(404).json({ message: 'Employee not found' });
     }
+    await Logs.create({
+        organisation_id:req.organisation_id,
+        user_id : newEmployee.id, 
+        action : `requested employee id  '${employee.id}' details in organisation id '${req.organisation_id}'`,
+        timestamp: new Date()
+    })
     return res.json(employee);
   } catch (error) {
     console.error('Get Employee by Id error:', error);
@@ -70,6 +83,12 @@ const updateEmployee = async (req, res) => {
       email: email || employee.email,
       phone: phone || employee.phone,
     });
+    await Logs.create({
+        organisation_id:req.organisation_id,
+        user_id : employee.id, 
+        action : `updated employee id  '${employee.id}' details in organisation id '${req.organisation_id}'`,
+        timestamp: new Date()
+    })
     return res.json(employee);
   } catch (error) {
     console.error('Update Employee error:', error);
@@ -87,6 +106,12 @@ const deleteEmployee = async (req, res) => {
     if (!employee) {
       return res.status(404).json({ message: 'Employee not found' });
     }
+    await Logs.create({
+        organisation_id:req.organisation_id,
+        user_id : employee.id, 
+        action : `deleted employee id  '${employee.id}' details in organisation id '${req.organisation_id}'`,
+        timestamp: new Date()
+    })
     await employee.destroy();
     return res.json({ message: 'Employee deleted' });
   } catch (error) {
