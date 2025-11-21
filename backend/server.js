@@ -11,7 +11,7 @@ require('./models/teams');
 require('./models/employees');
 require('./models/employee_teams');
 require('./models/logs');
-
+require('./models/associations')
 app.get('/', (req, res)=>{
     res.send('Server is running in the backend')
     console.log('Server is running in the backend')
